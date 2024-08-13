@@ -1,0 +1,35 @@
+class Employee{
+	void salary() {
+		System.out.println("the salary is:");
+	}
+}
+class Manager extends Employee{
+	void worktime() {
+		System.out.println("the worktime is:");
+	}
+	void access() {
+		System.out.println("the access for:");
+	}
+}
+class Clerk extends Manager{
+	void uniform() {
+		System.out.println("the uniform is:");
+	}
+}
+
+public class Main {
+	public static void main(String[] args) {
+      Clerk c=new Clerk();
+           Employee a=new Employee();
+           Manager m=new Manager();
+           m.salary();
+           c.worktime();
+           c.access();
+	}
+}
+      c.worktime();
+       c.salary();
+      c.access(); 
+	}
+
+}
