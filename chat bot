@@ -1,0 +1,34 @@
+import java.util.*;
+public class Main {
+    public static void main(String args[]){
+        Scanner sc=new Scanner(System.in);
+        System.out.println("Chatbot: Hello! Type 'bye' to Exit");
+        while(true){
+            System.out.println("You:");
+            String userInput=sc.nextLine().toLowerCase();
+            if(userInput.equals("bye")){
+                System.out.println("Chatbot:Goodbye!, Have a great day");
+                break;
+            }
+            String[] words=userInput.split(" ");
+            boolean found=false;
+            for(String word:words){
+                if(word.equals("hello")||word.equals("hi")){
+                    System.out.println("Chatbot: Hi! how can I assist you?");
+                    found=true;
+                    break;
+                }
+                else if(word.equals("help")){
+                    System.out.println("Chatbot: Sure! What do you need help with?");
+                    found=true;
+                    break;
+                }
+    }
+    if(!found){
+        System.out.println("ChatBot: I'am not sure I understand.Could you rephrase it?");
+    }
+}
+    }
+}
+
+
