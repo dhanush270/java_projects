@@ -1,0 +1,129 @@
+import java.util.*;
+
+class Book {
+    private int id;
+    private String title, author, genre;
+    private boolean isAvailable;
+
+    public Book(int id, String title, String author, String genre) {
+        this.id = id;
+        this.title = title;
+        this.author = author;
+        this.genre = genre;
+        this.isAvailable = true;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public boolean isAvailable() {
+        return isAvailable;
+    }
+
+    public void borrowBook() {
+        isAvailable = false;
+    }
+
+    public void returnBook() {
+        isAvailable = true;
+    }
+
+    @Override
+    public String toString() {
+        return "ID: " + id + ", Title: " + title + ", Author: " + author + ", Genre: " + genre + ", Available: " + isAvailable;
+    }
+}
+
+public class LibraryManagementSystem {
+    private static List<Book> books = new ArrayList<>();
+    private static Scanner sc = new Scanner(System.in);
+
+    public static void main(String[] args) {
+        while (true) {
+            System.out.println("\n1. Add Book\n2. View Books\n3. Borrow Book\n4. Return Book\n5. Exit");
+            System.out.print("Enter choice: ");
+            int choice = sc.nextInt();
+
+            switch (choice) {
+                case 1 -> addBook();
+                case 2 -> viewBooks();
+                case 3 -> borrowBook();
+                case 4 -> returnBook();
+                case 5 -> {
+                    System.out.println("Exiting...");
+                    return;
+                }
+                default -> System.out.println("Invalid choice!");
+            }
+        }
+    }
+
+    private static void addBook() {
+        System.out.print("Enter Book ID: ");
+        int id = sc.nextInt();
+        sc.nextLine(); // Consume newline
+        System.out.print("Enter Title: ");
+        String title = sc.nextLine();
+        System.out.print("Enter Author: ");
+        String author = sc.nextLine();
+        System.out.print("Enter Genre: ");
+        String genre = sc.nextLine();
+
+        books.add(new Book(id, title, author, genre));
+        System.out.println("Book added successfully!");
+    }
+
+    private static void viewBooks() {
+        if (books.isEmpty()) {
+            System.out.println("No books available.");
+            return;
+        }
+
+        for (Book book : books) {
+            System.out.println(book);
+        }
+    }
+
+    private static void borrowBook() {
+        System.out.print("Enter Book ID to borrow: ");
+        int id = sc.nextInt();
+
+        for (Book book : books) {
+            if (book.getId() == id) {
+                if (book.isAvailable()) {
+                    book.borrowBook();
+                    System.out.println("Book borrowed successfully!");
+                } else {
+                    System.out.println("Book is already borrowed.");
+                }
+                return;
+            }
+        }
+
+        System.out.println("Book not found!");
+    }
+
+    private static void returnBook() {
+        System.out.print("Enter Book ID to return: ");
+        int id = sc.nextInt();
+
+        for (Book book : books) {
+            if (book.getId() == id) {
+                if (!book.isAvailable()) {
+                    book.returnBook();
+                    System.out.println("Book returned successfully!");
+                } else {
+                    System.out.println("Book was not borrowed.");
+                }
+                return;
+            }
+        }
+
+        System.out.println("Book not found!");
+    }
+}
